@@ -1,0 +1,16 @@
+import type { Component } from 'solid-js';
+import { Card } from "@suid/material"
+
+import logo from '../logo.svg';
+import styles from '../App.module.css';
+
+const App: Component = () => {
+  return (
+    <div class={styles.App}>
+<Card  sx={{ minWidth: 275 ,  backgroundColor: 'blue' }} />
+      
+    </div>
+  );
+};
+
+export default App;
