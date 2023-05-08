@@ -1,26 +1,9 @@
 import type { Component } from "solid-js";
 import { Button, ListItem, Stack } from "@suid/material";
-import { List, ListItemButton, Box, Typography } from "@suid/material";
-import {
-  MenuList,
-  MenuItem,
-  ListItemIcon,
-  ListItemText,
-  Divider,
-} from "@suid/material";
+import { List, Box, Typography } from "@suid/material";
 
 import styles from "../App.module.css";
-import {
-  ArrowBack,
-  ArrowDownward,
-  ArrowLeftSharp,
-  ArrowRightSharp,
-  Cloud,
-  ContentCopy,
-  ContentCut,
-  ContentPaste,
-  Home,
-} from "@suid/icons-material";
+import { ArrowLeftSharp, ArrowRightSharp } from "@suid/icons-material";
 
 const App: Component = () => {
   return (
@@ -54,15 +37,15 @@ const App: Component = () => {
                 "& .MuiButton-root": {
                   transition: "all .5s",
                   width: 250,
-                  border:'1px solid rgba(255, 255, 255, 0)',
-                  borderRadius: '5px',
+                  border: "1px solid rgba(255, 255, 255, 0)",
+                  borderRadius: "5px",
                   height: 50,
                   "&:hover": {
                     backgroundColor: "rgba( 255, 255, 255, 0.45 )",
                     boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
                     backdropFilter: "blur(1.6px)",
-                    borderRadius: '16px',
-                    border:'1px solid rgba(255, 255, 255, 1)',
+                    borderRadius: "16px",
+                    border: "1px solid rgba(255, 255, 255, 1)",
                     color: "#b71d1d",
 
                     "& .MuiButton-startIcon": {
@@ -79,7 +62,7 @@ const App: Component = () => {
                   transition: "all .9s",
                   opacity: 0,
                 },
-                
+
                 "& .MuiButton-endIcon": {
                   transition: "all .9s",
                   opacity: 0,
