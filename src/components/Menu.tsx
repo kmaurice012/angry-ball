@@ -102,6 +102,16 @@ const App: Component = () => {
               <ListItem disablePadding>
                 <Button
                   variant="text"
+                  sx={{ color: "white" }}
+                  startIcon={<ArrowRightSharp />}
+                  endIcon={<ArrowLeftSharp />}
+                >
+                  Settings
+                </Button>
+              </ListItem>
+              <ListItem disablePadding>
+                <Button
+                  variant="text"
                   sx={{ color: "black" }}
                   startIcon={<ArrowRightSharp />}
                   endIcon={<ArrowLeftSharp />}

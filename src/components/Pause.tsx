@@ -89,6 +89,7 @@ const App: Component = () => {
                   Restart
                 </Button>
               </ListItem>
+
               <ListItem disablePadding>
                 <Button
                   variant="text"
@@ -99,6 +100,17 @@ const App: Component = () => {
                   Options
                 </Button>
               </ListItem>
+              <ListItem disablePadding>
+                <Button
+                  variant="text"
+                  sx={{ color: "white" }}
+                  startIcon={<ArrowRightSharp />}
+                  endIcon={<ArrowLeftSharp />}
+                >
+                  Settings
+                </Button>
+              </ListItem>
+          
               <ListItem disablePadding>
                 <Button
                   variant="text"
