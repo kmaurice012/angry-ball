@@ -27,7 +27,7 @@ const App: Component = () => {
           width="100%"
         >
           <Typography variant="h3" marginTop={4} gutterBottom>
-            Paused
+            Options
           </Typography>
 
           <nav aria-label="main mailbox folders">
@@ -69,16 +69,6 @@ const App: Component = () => {
                 },
               }}
             >
-              <ListItem disablePadding>
-                <Button
-                  variant="text"
-                  sx={{ color: "white" }}
-                  startIcon={<ArrowRightSharp />}
-                  endIcon={<ArrowLeftSharp />}
-                >
-                  Continue
-                </Button>
-              </ListItem>
               <ListItem disablePadding>
                 <Button
                   variant="text"
