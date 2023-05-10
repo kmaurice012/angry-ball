@@ -1,40 +1,91 @@
-import { Component, onCleanup, onMount } from "solid-js";
+import { Component, createSignal } from "solid-js";
 import { Box } from "@suid/material";
-import Canvas from "./Canvas";
-
 import styles from "../App.module.css";
 
-const App: Component = () => {
-  let canvas: any;
-  onMount(() => {
-    const ctx = canvas.getContext("2d");
-    let frame = requestAnimationFrame(loop);
+//referrences
+let ref: any = null;
+let rect: any = null;
+let painting = false;
+let ctx: any;
 
-    function loop(t: any) {
-      frame = requestAnimationFrame(loop);
+//handle event mouse
+const [pos, setPos] = createSignal({ x: 0, y: 0 });
+const [initipos, setInitialPos] = createSignal({ x: 0, y: 0 });
+const [endpos, endPos] = createSignal({ x: 0, y: 0 });
 
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+const handleMouseMove = (event: any) => {
+  ref = document.getElementById("canvas");
+  rect = ref != null ? ref.getBoundingClientRect() : null;
+  ctx = ref.getContext("2d");
 
-      for (let p = 0; p < imageData.data.length; p += 4) {
-        const i = p / 4;
-        const x = i % canvas.width;
-        const y = (i / canvas.height) >>> 0;
+  console.log(painting, "Painting");
 
-        const r = 64 + (128 * x) / canvas.width + 64 * Math.sin(t / 1000);
-        const g = 64 + (128 * y) / canvas.height + 64 * Math.cos(t / 1000);
-        const b = 128;
+  // if (!painting) return;
 
-        imageData.data[p + 0] = r;
-        imageData.data[p + 1] = g;
-        imageData.data[p + 2] = b;
-        imageData.data[p + 3] = 255;
-      }
+  // ctx.lineWidth = 10;
+  // ctx.lineCap = "round";
+  // ctx.lineTo(event.clientX, event.clientY);
+  // ctx.stroke();
+  // ctx.beginPath();
+  // ctx.moveTo(event.clientX, event.clientY);
+  ctx.fillRect(190, 535, 70, 10);
 
-      ctx.putImageData(imageData, 0, 0);
-    }
+  const ball = {
+    x: 25,
+    y: 25,
+  };
+  const velocity = 3;
+  const startingAngle = 70;
+  const rad = 20;
+  let moveX = Math.cos((Math.PI / 180) * startingAngle) * velocity;
+  let moveY = Math.sin((Math.PI / 180) * startingAngle) * velocity;
 
-    onCleanup(() => cancelAnimationFrame(frame));
+  const drawMe = () => {
+    ctx.beginPath();
+    ctx.fillStyle = "green";
+    ctx.arc(ball.x, ball.y, rad, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.closePath();
+  };
+  //set current position
+  setPos({
+    x: event.clientX,
+    y: event.clientY,
   });
+};
+
+const startPosition = (event: any) => {
+  painting = true;
+  // handleMouseMove(event);
+  setInitialPos({
+    x: event.clientX,
+    y: event.clientY,
+  });
+};
+const endPosition = (event: any) => {
+  painting = false;
+  // ctx.beginPath();
+  endPos({
+    x: event.clientX,
+    y: event.clientY,
+  });
+};
+
+const App: Component = () => {
+  const Canvas = (props: any) => {
+    return (
+      <canvas
+        id={props.id}
+        width={props.width}
+        height={props.height}
+        style={{ "border-radius": "16px" }}
+        onmousemove={handleMouseMove}
+        onmousedown={startPosition}
+        onmouseup={endPosition}
+      />
+    );
+  };
+
   return (
     <Box class={styles.App} bgcolor="#FF164C" color="white">
       <Box
@@ -49,7 +100,9 @@ const App: Component = () => {
         }}
         border={"1px solid rgba(255, 255, 255, 1)"}
       >
-        <Canvas ref={canvas} /> 
+        <Canvas id="canvas" width={"450"} height={"550"} />
+        x: {pos().x}
+        y: {pos().y}
       </Box>
     </Box>
   );
